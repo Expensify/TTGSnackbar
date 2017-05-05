@@ -80,6 +80,9 @@ open class TTGSnackbar: UIView {
     /// Second action block
     open dynamic var secondActionBlock: TTGActionBlock? = nil
 
+    /// Called before starting to dismiss the snackbar
+    open dynamic var willDismissBlock: TTGDismissBlock? = nil
+
     /// Dismiss callback.
     open dynamic var dismissBlock: TTGDismissBlock? = nil
 
@@ -664,6 +667,7 @@ public extension TTGSnackbar {
 
         setNeedsLayout()
         
+        willDismissBlock?(self)
         UIView.animate(withDuration: animationDuration, delay: 0,
                        usingSpringWithDamping: animationSpringWithDamping,
                        initialSpringVelocity: animationInitialSpringVelocity, options: .curveEaseIn,
