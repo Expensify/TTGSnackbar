@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "TTGSnackbar"
   s.module_name  = "TTGSnackbar"
-  s.version      = "1.5.2"
+  s.version      = "1.5.3"
   s.summary      = "A Swift based implementation of the Android Snackbar for iOS. Show simple message and action button or custom view like a Toast."
 
   s.description  = <<-DESC
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "8.0"
   s.ios.deployment_target     = '8.0'
-  s.source       = { :git => "https://github.com/zekunyan/TTGSnackbar.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/Expensify/TTGSnackbar.git", :tag => s.version.to_s }
   s.source_files = "TTGSnackbar/**/*.{h,swift}"
   s.requires_arc = true
 end
