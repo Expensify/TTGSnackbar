@@ -467,8 +467,19 @@ public extension TTGSnackbar {
         
         addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
 
+        // We always want to present in the main window of the app, but we can't
+        // use UIApplication.shared.keyWindow because it's different when using
+        // a whisper library that modifies the status bar.
+        var windowToUse: UIWindow?
+        for window in UIApplication.shared.windows {
+            if window.windowLevel == UIWindowLevelNormal {
+                windowToUse = window
+                break
+            }
+        }
+
         // Get super view to show
-        if let superView = containerView ?? UIApplication.shared.keyWindow {
+        if let superView = containerView ?? windowToUse {
             superView.addSubview(self)
             
             // Left margin constraint
