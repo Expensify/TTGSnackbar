@@ -18,10 +18,11 @@ import Darwin
  - Short:        1 second
  - Middle:       3 seconds
  - Long:         5 seconds
- - Expensify15: 15 seconds
- - Expensify20: 20 seconds
- - Expensify25: 25 seconds
- - Expensify30: 30 seconds
+ - expensify10: 10 seconds
+ - expensify15: 15 seconds
+ - expensify20: 20 seconds
+ - expensify25: 25 seconds
+ - expensify30: 30 seconds
  - Forever: Not dismiss automatically. Must be dismissed manually.
  */
 
@@ -29,10 +30,11 @@ import Darwin
     case short = 1
     case middle = 3
     case long = 5
-    case Expensify15 = 15
-    case Expensify20 = 20
-    case Expensify25 = 25
-    case Expensify30 = 30
+    case expensify10 = 10
+    case expensify15 = 15
+    case expensify20 = 20
+    case expensify25 = 25
+    case expensify30 = 30
     case forever = 2147483647 // Must dismiss manually.
 }
 
