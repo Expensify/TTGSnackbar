@@ -15,13 +15,13 @@ import Darwin
 /**
  Snackbar display duration types.
  
- - Short:       1 second
- - Middle:      3 seconds
- - Long:        5 seconds
- - Expensify1: 15 seconds
- - Expensify2: 20 seconds
- - Expensify3: 25 seconds
- - Expensify4: 30 seconds
+ - Short:        1 second
+ - Middle:       3 seconds
+ - Long:         5 seconds
+ - Expensify15: 15 seconds
+ - Expensify20: 20 seconds
+ - Expensify25: 25 seconds
+ - Expensify30: 30 seconds
  - Forever: Not dismiss automatically. Must be dismissed manually.
  */
 
@@ -29,10 +29,10 @@ import Darwin
     case short = 1
     case middle = 3
     case long = 5
-    case expensify1 = 15
-    case expensify2 = 20
-    case expensify3 = 25
-    case expensify4 = 30
+    case Expensify15 = 15
+    case Expensify20 = 20
+    case Expensify25 = 25
+    case Expensify30 = 30
     case forever = 2147483647 // Must dismiss manually.
 }
 
