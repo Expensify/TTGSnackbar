@@ -14,15 +14,15 @@ import Darwin
 /**
  Snackbar display duration types.
  
- - Short:        1 second
- - Middle:       3 seconds
- - Long:         5 seconds
+ - short:        1 second
+ - middle:       3 seconds
+ - long:         5 seconds
  - expensify10: 10 seconds
  - expensify15: 15 seconds
  - expensify20: 20 seconds
  - expensify25: 25 seconds
  - expensify30: 30 seconds
- - Forever: Not dismiss automatically. Must be dismissed manually.
+ - forever: Not dismiss automatically. Must be dismissed manually.
  */
 
 @objc public enum TTGSnackbarDuration: Int {
@@ -103,7 +103,7 @@ open class TTGSnackbar: UIView {
     @objc open dynamic var secondActionBlock: TTGActionBlock? = nil
 
     /// Called before starting to dismiss the snackbar
-    open dynamic var willDismissBlock: TTGDismissBlock? = nil
+    @objc open dynamic var willDismissBlock: TTGDismissBlock? = nil
 
     /// Dismiss callback.
     @objc open dynamic var dismissBlock: TTGDismissBlock? = nil
@@ -386,7 +386,7 @@ open class TTGSnackbar: UIView {
      
      - returns: TTGSnackbar instance
      */
-    public init(message: String, duration: TTGSnackbarDuration) {
+    @objc public init(message: String, duration: TTGSnackbarDuration) {
         super.init(frame: TTGSnackbar.snackbarDefaultFrame)
         self.duration = duration
         self.message = message
@@ -468,7 +468,7 @@ public extension TTGSnackbar {
     /**
      Show the snackbar.
      */
-    public func show() {
+    @objc public func show() {
         // Only show once
         if superview != nil {
             return
@@ -807,6 +807,7 @@ private extension TTGSnackbar {
         contentView.addSubview(iconImageView)
 
         messageLabel = UILabel()
+        messageLabel.accessibilityIdentifier = "messageLabel"
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.textColor = UIColor.white
         messageLabel.font = messageTextFont
@@ -818,6 +819,7 @@ private extension TTGSnackbar {
         contentView.addSubview(messageLabel)
 
         actionButton = UIButton()
+        actionButton.accessibilityIdentifier = "actionButton"
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.backgroundColor = UIColor.clear
         actionButton.contentEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 4)
@@ -830,6 +832,7 @@ private extension TTGSnackbar {
         contentView.addSubview(actionButton)
 
         secondActionButton = UIButton()
+        secondActionButton.accessibilityIdentifier = "secondActionButton"
         secondActionButton.translatesAutoresizingMaskIntoConstraints = false
         secondActionButton.backgroundColor = UIColor.clear
         secondActionButton.contentEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 4)
