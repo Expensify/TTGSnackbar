@@ -204,35 +204,35 @@ open class TTGSnackbar: UIView {
     /// Action button title.
     @objc open dynamic var actionText: String = "" {
         didSet {
-            actionButton.setTitle(actionText, for: UIControl.State())
+            actionButton.setTitle(actionText, for: .normal)
         }
     }
 
     /// Action button image.
     @objc open dynamic var actionIcon: UIImage? = nil {
         didSet {
-            actionButton.setImage(actionIcon, for: UIControl.State())
+            actionButton.setImage(actionIcon, for: .normal)
         }
     }
 
     /// Second action button title.
     @objc open dynamic var secondActionText: String = "" {
         didSet {
-            secondActionButton.setTitle(secondActionText, for: UIControl.State())
+            secondActionButton.setTitle(secondActionText, for: .normal)
         }
     }
 
     /// Action button title color. Default is white.
     @objc open dynamic var actionTextColor: UIColor = UIColor.white {
         didSet {
-            actionButton.setTitleColor(actionTextColor, for: UIControl.State())
+            actionButton.setTitleColor(actionTextColor, for: .normal)
         }
     }
 
     /// Second action button title color. Default is white.
     @objc open dynamic var secondActionTextColor: UIColor = UIColor.white {
         didSet {
-            secondActionButton.setTitleColor(secondActionTextColor, for: UIControl.State())
+            secondActionButton.setTitleColor(secondActionTextColor, for: .normal)
         }
     }
 
@@ -477,7 +477,7 @@ public extension TTGSnackbar {
         // Create dismiss timer
         dismissTimer = Timer.init(timeInterval: (TimeInterval)(duration.rawValue),
                                   target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
-        RunLoop.main.add(dismissTimer!, forMode: RunLoop.Mode.common)
+        RunLoop.main.add(dismissTimer!, forMode: .common)
 
         // Show or hide action button
         iconImageView.isHidden = icon == nil
@@ -512,7 +512,7 @@ public extension TTGSnackbar {
         // a whisper library that modifies the status bar.
         var windowToUse: UIWindow?
         for window in UIApplication.shared.windows {
-            if window.windowLevel == UIWindow.Level.normal {
+            if window.windowLevel == .normal {
                 windowToUse = window
                 break
             }
@@ -826,8 +826,8 @@ private extension TTGSnackbar {
         actionButton.titleLabel?.font = actionTextFont
         actionButton.titleLabel?.adjustsFontSizeToFitWidth = true
         actionButton.titleLabel?.numberOfLines = actionTextNumberOfLines
-        actionButton.setTitle(actionText, for: UIControl.State())
-        actionButton.setTitleColor(actionTextColor, for: UIControl.State())
+        actionButton.setTitle(actionText, for: .normal)
+        actionButton.setTitleColor(actionTextColor, for: .normal)
         actionButton.addTarget(self, action: #selector(doAction(_:)), for: .touchUpInside)
         contentView.addSubview(actionButton)
 
@@ -839,8 +839,8 @@ private extension TTGSnackbar {
         secondActionButton.titleLabel?.font = secondActionTextFont
         secondActionButton.titleLabel?.adjustsFontSizeToFitWidth = true
         secondActionButton.titleLabel?.numberOfLines = actionTextNumberOfLines
-        secondActionButton.setTitle(secondActionText, for: UIControl.State())
-        secondActionButton.setTitleColor(secondActionTextColor, for: UIControl.State())
+        secondActionButton.setTitle(secondActionText, for: .normal)
+        secondActionButton.setTitleColor(secondActionTextColor, for: .normal)
         secondActionButton.addTarget(self, action: #selector(doAction(_:)), for: .touchUpInside)
         contentView.addSubview(secondActionButton)
 
@@ -857,37 +857,37 @@ private extension TTGSnackbar {
         // Add constraints
         let hConstraints = NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-0-[iconImageView]-2-[messageLabel]-2-[seperateView(0.5)]-2-[actionButton(>=44@999)]-0-[secondActionButton(>=44@999)]-0-|",
-            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
+            options: [],
             metrics: nil,
             views: ["iconImageView": iconImageView, "messageLabel": messageLabel, "seperateView": separateView, "actionButton": actionButton, "secondActionButton": secondActionButton])
         
         let vConstraintsForIconImageView = NSLayoutConstraint.constraints(
             withVisualFormat: "V:|-2-[iconImageView]-2-|",
-            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
+            options: [],
             metrics: nil,
             views: ["iconImageView": iconImageView])
 
         let vConstraintsForMessageLabel = NSLayoutConstraint.constraints(
             withVisualFormat: "V:|-0-[messageLabel]-0-|",
-            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
+            options: [],
             metrics: nil,
             views: ["messageLabel": messageLabel])
 
         let vConstraintsForSeperateView = NSLayoutConstraint.constraints(
             withVisualFormat: "V:|-4-[seperateView]-4-|",
-            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
+            options: [],
             metrics: nil,
             views: ["seperateView": separateView])
 
         let vConstraintsForActionButton = NSLayoutConstraint.constraints(
             withVisualFormat: "V:|-0-[actionButton]-0-|",
-            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
+            options: [],
             metrics: nil,
             views: ["actionButton": actionButton])
 
         let vConstraintsForSecondActionButton = NSLayoutConstraint.constraints(
             withVisualFormat: "V:|-0-[secondActionButton]-0-|",
-            options: NSLayoutConstraint.FormatOptions(rawValue: 0),
+            options: [],
             metrics: nil,
             views: ["secondActionButton": secondActionButton])
 
@@ -909,7 +909,7 @@ private extension TTGSnackbar {
 
         let hConstraintsForActivityIndicatorView = NSLayoutConstraint.constraints(
         withVisualFormat: "H:[activityIndicatorView]-2-|",
-        options: NSLayoutConstraint.FormatOptions(rawValue: 0),
+        options: [],
                 metrics: nil,
                 views: ["activityIndicatorView": activityIndicatorView])
 
