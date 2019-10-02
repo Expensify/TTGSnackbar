@@ -468,7 +468,7 @@ public extension TTGSnackbar {
     /**
      Show the snackbar.
      */
-    @objc public func show() {
+    @objc public func show(in window: UIWindow? = nil) {
         // Only show once
         if superview != nil {
             return
@@ -506,15 +506,17 @@ public extension TTGSnackbar {
                                                              toItem: self, attribute: .right, multiplier: 1, constant: -contentInset.right)
         
         addConstraints([contentViewTopConstraint!, contentViewBottomConstraint!, contentViewLeftConstraint!, contentViewRightConstraint!])
-
+ 
         // We always want to present in the main window of the app, but we can't
         // use UIApplication.shared.keyWindow because it's different when using
         // a whisper library that modifies the status bar.
-        var windowToUse: UIWindow?
-        for window in UIApplication.shared.windows {
-            if window.windowLevel == .normal {
-                windowToUse = window
-                break
+        var windowToUse: UIWindow? = window
+        if windowToUse == nil {
+            for window in UIApplication.shared.windows {
+                if window.windowLevel == .normal {
+                    windowToUse = window
+                    break
+                }
             }
         }
 
