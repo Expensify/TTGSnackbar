@@ -688,7 +688,8 @@ public extension TTGSnackbar {
      */
     fileprivate func dismissAnimated(_ animated: Bool) {
         // If the dismiss timer is nil, snackbar is dismissing or not ready to dismiss.
-        if dismissTimer == nil {
+        // If superview is nil it means the snakbar no longer needs to be dismissed
+        guard dismissTimer != nil, superview != nil else {
             return
         }
         
