@@ -5,7 +5,7 @@ A Swift based implementation of the Android Snackbar for iOS
 [![Version](https://img.shields.io/cocoapods/v/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![License](https://img.shields.io/cocoapods/l/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
 [![Platform](https://img.shields.io/cocoapods/p/TTGSnackbar.svg?style=flat)](https://github.com/zekunyan/TTGSnackbar)
-[![Swift4](https://img.shields.io/badge/Swift-4-orange.svg)](https://developer.apple.com/swift)
+[![Swift5](https://img.shields.io/badge/Swift-5-orange.svg)](https://developer.apple.com/swift)
 [![Apps Using](https://img.shields.io/badge/Apps%20Using-%3E%20787-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 [![Total Download](https://img.shields.io/badge/Total%20Download-%3E%2036,840-blue.svg)](https://github.com/zekunyan/TTGSnackbar)
 
@@ -22,13 +22,18 @@ It disappears after a timeout or after user click the action button.
 
 # Installation
 
+### Swift 5
+Version 1.9.0+
+Xcode 9+
+iOS 8+
+
 ### Swift 4
-Swift 4  
+Version 1.6.0
 Xcode 9  
 iOS 8+
 
-### Swift 3 - Version 1.5.3
-Swift 3  
+### Swift 3 
+Version 1.5.3
 Xcode 8  
 iOS 8+
 
@@ -62,28 +67,32 @@ snackbar.show()
 ## Show a simple message with an action button
 ![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_2.png)
 ```
-let snackbar = TTGSnackbar(message: "TTGSnackBar !",
-                           duration: .middle,
-                           actionText: "Action!",
-                           actionBlock: { (snackbar) in
-            print("Click action!")
-})
+let snackbar = TTGSnackbar(
+    message: "TTGSnackBar !",
+    duration: .middle,
+    actionText: "Action!",
+    actionBlock: { (snackbar) in
+        print("Click action!")
+    }
+)
 snackbar.show()
 ```
 
 ## Show a simple message with a long running action
 ![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_3.png)
 ```
-let snackbar = TTGSnackbar(message: "TTGSnackbar !",
-                           duration: .forever,
-                           actionText: "Action",
-                           actionBlock: { (snackbar) in
-            print("Click action!")
-            // Dismiss manually after 3 seconds
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-                snackbar.dismiss()
-            }
-})
+let snackbar = TTGSnackbar(
+    message: "TTGSnackbar !",
+    duration: .forever,
+    actionText: "Action",
+    actionBlock: { (snackbar) in
+        print("Click action!")
+        // Dismiss manually after 3 seconds
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(3 * Double(NSEC_PER_SEC))) / Doubl(NSEC_PER_SEC)) {
+            snackbar.dismiss()
+        }   
+    }
+)
 snackbar.show()
 ```
 
@@ -128,7 +137,7 @@ let snackbar = TTGSnackbar(customContentView: customContentView, duration: .long
 snackbar.show()
 ```
 
-## [New!] Make use of the Gesture recognizers in snackbar
+## Make use of the Gesture recognizers in snackbar
 ![Example](https://github.com/zekunyan/TTGSnackbar/raw/master/Resources/snackbar_5.jpg)
 ```
 let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
@@ -160,10 +169,30 @@ snackbar.onSwipeBlock = { (snackbar, direction) in
 snackbar.show()
 ```
 
+## [New!] Automatic handling of Showing one Snackbar at a time 
+
+`TTGSnackbarManager` can handle automatically showing and replacing the presented Snackbars at your screen.
+
+**Note**: This is an experimental feature that works only for *message only* snackbars at the moment.
+
+```swift 
+let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
+TTGSnackbarManager.show(snackbar)
+```
+
+`TTGSnackbarManager` uses the `dismissBlock` property of a snackbar, if you still need to use it you can use the `dismissBlock` parameter of `TTGSnackbarManager.show(_: TTGSnackbar, dismissBlock: @escaping TTGDismissBlock)` Example:
+
+```swift 
+let snackbar = TTGSnackbar(message: "TTGSnackbar !", duration: .long)
+TTGSnackbarManager.show(snackbar) {
+    // Some dismiss block here
+}
+```
 
 # Customization
+
 ### Message
-`message: String` defines the message to display. **Supports multi line text.**
+`message: String` defines the message to display. **Supports multi line text.** **Supports updating on the fly.** 
 
 ### Message text color
 `messageTextColor: UIColor` defines the message text color.
@@ -213,21 +242,21 @@ secondActionBlock: TTGActionBlock?
 public typealias TTGDismissBlock = (snackbar: TTGSnackbar) -> Void
 ```
 
-### [New!] On Tap Gesture callback
+### On Tap Gesture callback
 `onTapBlock: TTGActionBlock` will be called when the user taps the snackbar.
 ```
 // TTGActionBlock definition.
 public typealias TTGActionBlock = (snackbar: TTGSnackbar) -> Void
 ```
 
-### [New!] On Swipe Gesture callback
+### On Swipe Gesture callback
 `onSwipeBlock: TTGSwipeBlock` will be called when the user swipes on the snackbar
 ```
 /// Swipe gesture callback closure
 public typealias TTGSwipeBlock = (_ snackbar: TTGSnackbar, _ direction: UISwipeGestureRecognizerDirection) -> Void
 ```
 
-### [New!] Auto Dismissal using Swipe Gestures
+### Auto Dismissal using Swipe Gestures
 `shouldDismissOnSwipe: Bool` will determine if the snackbar will automatically be dismissed when it's swiped
 ```
 /// A property to make the snackbar auto dismiss on Swipe Gesture
